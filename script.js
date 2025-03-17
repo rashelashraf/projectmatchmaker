@@ -1965,6 +1965,7 @@ function renderProjectsView() {
 }
 
 // Render the Group Submissions view with Firebase integration
+// Render the Group Submissions view with Firebase integration
 function renderSubmissionsView() {
   const mainContent = document.getElementById("main-content");
   mainContent.innerHTML = `
@@ -1976,23 +1977,6 @@ function renderSubmissionsView() {
       </div>
     </div>
   `;
-
-  html += `<div class="group-card">
-          <h3>Submission ${index + 1}</h3>
-          <p><strong>Project Name:</strong> ${group.projectName}</p>
-          <p><strong>Group Name:</strong> ${group.groupName || `Group for ${group.projectName}`}</p>
-          <p><strong>Group Members:</strong></p>
-          <ul>`;
-group.groupMembers.forEach(function (member) {
-  html += `<li>${member.name} (ID: ${member.studentId})</li>`;
-});
-html += `</ul>
-          <p><small>Submitted on: ${new Date(group.timestamp).toLocaleString()}</small></p>
-          <div class="button-group">
-            <button class="edit-btn" onclick="editGroupSubmission('${group.id}')">Edit Group</button>
-            <button class="delete-btn" onclick="removeGroupSubmission('${group.id}', ${index})">Remove Group</button>
-          </div>
-        </div>`;
 
   // Load submissions from Firebase
   loadSubmissionsFromFirebase()
@@ -2022,7 +2006,10 @@ html += `</ul>
           });
           html += `</ul>
                     <p><small>Submitted on: ${new Date(group.timestamp).toLocaleString()}</small></p>
-                    <button class="delete-btn" onclick="removeGroupSubmission('${group.id}', ${index})">Remove Group</button>
+                    <div class="button-group">
+                      <button class="edit-btn" onclick="editGroupSubmission('${group.id}')">Edit Group</button>
+                      <button class="delete-btn" onclick="removeGroupSubmission('${group.id}', ${index})">Remove Group</button>
+                    </div>
                   </div>`;
         });
         container.innerHTML = html;
